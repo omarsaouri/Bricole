@@ -4,6 +4,9 @@ const {
   validatePhoneNumber,
   validatePassword,
 } = require('../../validations/auth/registerValidations');
+const {
+  validateDifficulty,
+} = require('../../validations/request/requestValidations');
 
 const firstNameMiddleware = (req, res, next) => {
   const firstName = req.body.firstName;
@@ -37,9 +40,18 @@ const passwordMiddleware = (req, res, next) => {
   res.status(400).send(msg);
 };
 
+const idealDifficultydMiddleware = (req, res, next) => {
+  const idealDifficulty = req.body.idealDifficulty;
+  const {state, msg} = validateDifficulty(idealDifficulty);
+
+  if (state) return next();
+  res.status(400).send(msg);
+};
+
 module.exports = {
   firstNameMiddleware,
   lastNameMiddleware,
   phoneNumberMiddleware,
   passwordMiddleware,
+  idealDifficultydMiddleware,
 };

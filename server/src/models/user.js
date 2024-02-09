@@ -6,6 +6,8 @@ const userSchema = new Schema({
   lastName: String,
   phoneNumber: String,
   password: String,
+  idealDifficulty: String,
+  city: String,
 });
 
 const userModel = mongoose.model('User', userSchema);

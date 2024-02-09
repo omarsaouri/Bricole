@@ -1,10 +1,11 @@
-import {TextInput, View} from 'react-native';
+import {useState} from 'react';
+import {View} from 'react-native';
 import {s} from 'react-native-wind';
+import registerUser from '../../api/modules/auth/registerUser';
 import BackButton from '../../components/atoms/BackButton';
 import Button from '../../components/atoms/Button';
-import {useEffect, useState} from 'react';
-import registerUser from '../../api/modules/auth/registerUser';
 import ValidationInput from '../../components/atoms/ValidationInput';
+import storeData from '../../helpers/asyncStorage/storeData';
 
 const RegisterScreen = () => {
   const [areFieldsValid, setAreFieldsValid] = useState([
@@ -27,7 +28,8 @@ const RegisterScreen = () => {
         phoneNumber,
         password,
       );
-      console.log(data);
+      storeData('access_token', data.access_token);
+      storeData('phoneNumber', data.phoneNumber);
     } catch (error) {
       console.log(error.response.data);
     }

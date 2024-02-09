@@ -3,7 +3,8 @@ const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
-  const {firstName, lastName, phoneNumber, password} = req.body;
+  const {firstName, lastName, phoneNumber, password, idealDifficulty, city} =
+    req.body;
 
   try {
     const hashedPassword = await hashPassword(password);
@@ -12,6 +13,8 @@ const registerUser = async (req, res) => {
       lastName: lastName,
       phoneNumber: phoneNumber,
       password: hashedPassword,
+      idealDifficulty: idealDifficulty,
+      city: city,
     };
     await User.create(user);
     const userPayload = {

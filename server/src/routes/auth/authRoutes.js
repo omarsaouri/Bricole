@@ -1,19 +1,19 @@
 const express = require('express');
+const authRouter = express.Router();
 const registerUser = require('../../controllers/auth/registerController');
+const loginUser = require('../../controllers/auth/loginController');
 const {
   firstNameMiddleware,
-} = require('../../middlewares/auth/registerMiddlewares');
-const {
   lastNameMiddleware,
-} = require('../../middlewares/auth/registerMiddlewares');
-const {
   phoneNumberMiddleware,
-} = require('../../middlewares/auth/registerMiddlewares');
-const {
   passwordMiddleware,
+  idealDifficultydMiddleware,
 } = require('../../middlewares/auth/registerMiddlewares');
-const loginUser = require('../../controllers/auth/loginController');
-const authRouter = express.Router();
+
+const {
+  difficultyMiddleware,
+  cityMiddleware,
+} = require('../../middlewares/request/newRequestMiddlewares');
 
 authRouter.post(
   '/register',
@@ -21,6 +21,8 @@ authRouter.post(
   lastNameMiddleware,
   phoneNumberMiddleware,
   passwordMiddleware,
+  idealDifficultydMiddleware,
+  cityMiddleware,
   registerUser,
 );
 
