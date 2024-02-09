@@ -5,7 +5,7 @@ const requestSchema = new Schema({
   description: String,
   price: Number,
   city: String, // depend on it to make a good algorithm
-  address: String, // full adress
+  address: String, // full address
   postedDate: {type: Date, default: Date.now},
   dueDate: Date,
   difficulty: String,
