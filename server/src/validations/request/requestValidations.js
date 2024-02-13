@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const fetchCitiesApi = require('./citiesApi');
+const fetchCitiesApi = require('../../helpers/citiesApi');
 
 const validateDescription = desc => {
   if (!desc) return {state: false, msg: 'Description is required'};

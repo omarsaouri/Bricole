@@ -1,6 +1,6 @@
 const express = require('express');
-const newRequest = require('../../controllers/request/newRequestController');
 const requestRouter = express.Router();
+const newRequest = require('../../controllers/request/newRequestController');
 const {
   descriptionMiddleware,
   priceMiddleware,

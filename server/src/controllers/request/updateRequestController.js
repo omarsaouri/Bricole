@@ -1,21 +1,42 @@
-const Request = require('../../models/request');
+const supabase = require('../../models/supabase');
 
 const updateRequest = async (req, res) => {
   const requestId = req.params.id;
   const {key, value} = req.body;
 
   try {
-    const request = await Request.findById(requestId);
+    const {data: existingRequest, error: fetchError} = await supabase
+      .from('requests')
+      .select('*')
+      .eq('id', requestId)
+      .single()
+      .select('*');
 
-    if (!request) {
+    if (fetchError) {
+      throw fetchError;
+    }
+
+    if (!existingRequest) {
       return res.status(404).send('Request not found');
     }
-    request[key] = value;
-    await request.save();
 
-    return res.status(200).json(request);
+    const {data: updatedRequest, error: updateError} = await supabase
+      .from('requests')
+      .update({[key]: value})
+      .eq('id', requestId)
+      .single()
+      .select('*');
+
+    if (updateError) {
+      throw updateError;
+    }
+
+    return res.status(200).json(updatedRequest);
   } catch (error) {
-    return res.status(500).json({error: 'Internal Server Error'});
+    console.error('Error updating request:', error);
+    return res
+      .status(500)
+      .json({error: 'Internal Server Error', message: error.message});
   }
 };
 

@@ -1,10 +1,17 @@
 const {hashPassword} = require('../../helpers/hash');
-const User = require('../../models/user');
+const supabase = require('../../models/supabase');
 const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
-  const {firstName, lastName, phoneNumber, password, idealDifficulty, city} =
-    req.body;
+  const {
+    firstName,
+    lastName,
+    phoneNumber,
+    password,
+    idealDifficulty,
+    city,
+    points,
+  } = req.body;
 
   try {
     const hashedPassword = await hashPassword(password);
@@ -15,15 +22,26 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
       idealDifficulty: idealDifficulty,
       city: city,
+      points: points,
     };
-    await User.create(user);
+    const {data: insertedUser, error} = await supabase
+      .from('users')
+      .insert([{...user}])
+      .select('*');
+
+    if (error) {
+      throw error;
+    }
+
     const userPayload = {
-      id: user.phoneNumber,
+      id: phoneNumber,
     };
     const access_token = jwt.sign(userPayload, process.env.JWT_SECRET);
-    res.status(201).json({user: user, access_token: access_token});
+
+    res.status(201).json({user: insertedUser, access_token: access_token});
   } catch (error) {
-    res.status(500).send(error);
+    console.error('Error registering user:', error.message);
+    res.status(500).send('Internal server error');
   }
 };
 

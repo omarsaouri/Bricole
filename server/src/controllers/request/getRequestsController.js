@@ -1,41 +1,36 @@
-const Request = require('../../models/request');
+const supabase = require('../../models/supabase');
 
 const getRequests = async (req, res) => {
   try {
-    const {idealDifficulty, city} = req.query;
+    const {difficulty, city} = req.query;
 
-    // idealDifficulty nor city are provided
-    if (!idealDifficulty && !city) {
-      const allRequests = await Request.find();
-      return res.json(allRequests);
-    }
+    let filteredRequests;
 
-    // idealDifficulty is provided
-    if (idealDifficulty && !city) {
-      const noCityFilterRequests = await Request.find({
-        difficulty: idealDifficulty,
-      });
-      return res.json(noCityFilterRequests);
-    }
+    if (!difficulty && !city) {
+      const {data, error} = await supabase.from('requests').select('*');
 
-    // city is provided
-    if (city && !idealDifficulty) {
-      const noDifficultyFilterRequests = await Request.find({
-        city: city,
-      });
-      return res.json(noDifficultyFilterRequests);
-    }
+      if (error) {
+        throw error;
+      }
 
-    // both idealDifficulty and city are provided
-    if (city && idealDifficulty) {
-      const filteredRequests = await Request.find({
-        difficulty: idealDifficulty,
-        city: city,
-      });
-      return res.json(filteredRequests);
+      res.json(data);
+    } else {
+      const {data, error} = await supabase
+        .from('requests')
+        .select('*')
+        .eq('difficulty', difficulty)
+        .eq('city', city)
+        .order('created_at', {ascending: false});
+
+      if (error) {
+        throw error;
+      }
+
+      res.json(data);
     }
   } catch (error) {
-    return res.status(500).json({error: 'Internal Server Error'});
+    console.error('Error fetching requests:', error);
+    res.status(500).json({error: 'Internal Server Error'});
   }
 };
 

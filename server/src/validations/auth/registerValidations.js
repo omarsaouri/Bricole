@@ -1,4 +1,5 @@
-const User = require('../../models/user');
+const supabase = require('../../models/supabase');
+
 ///^[a-zA-Z]{3,20}$/
 const validateFirstName = fName => {
   if (!fName) return {state: false, msg: 'First name is required'};
@@ -22,9 +23,15 @@ const validatePhoneNumber = async phoneNumber => {
     return {state: false, msg: 'Phone number must be 10 characters long'};
   if (!phoneNumberRegex.test(phoneNumber))
     return {state: false, msg: 'Phone number must begin with 06 or 07'};
-  const existingNumber = await User.findOne({phoneNumber: phoneNumber});
-  if (existingNumber)
-    return {state: false, msg: 'Phone number is already used'};
+  const {data, error} = await supabase
+    .from('users')
+    .select('*')
+    .eq('phoneNumber', phoneNumber)
+    .single();
+
+  const existingUser = data;
+
+  if (existingUser) return {state: false, msg: 'Phone number is already used'};
   return {state: true, msg: ''};
 };
 
