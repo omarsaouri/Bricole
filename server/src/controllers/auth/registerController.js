@@ -3,15 +3,7 @@ const supabase = require('../../models/supabase');
 const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    phoneNumber,
-    password,
-    idealDifficulty,
-    city,
-    points,
-  } = req.body;
+  const {firstName, lastName, phoneNumber, password} = req.body;
 
   try {
     const hashedPassword = await hashPassword(password);
@@ -20,14 +12,12 @@ const registerUser = async (req, res) => {
       lastName: lastName,
       phoneNumber: phoneNumber,
       password: hashedPassword,
-      idealDifficulty: idealDifficulty,
-      city: city,
-      points: points,
     };
     const {data: insertedUser, error} = await supabase
       .from('users')
       .insert([{...user}])
-      .select('*');
+      .select('*')
+      .single();
 
     if (error) {
       throw error;

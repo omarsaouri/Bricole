@@ -3,15 +3,13 @@ const supabase = require('../../models/supabase');
 ///^[a-zA-Z]{3,20}$/
 const validateFirstName = fName => {
   if (!fName) return {state: false, msg: 'First name is required'};
-  if (fName.length < 3) return {state: false, msg: 'First name too long'};
-  if (fName.length > 20) return {state: false, msg: 'First name too long'};
+  if (fName.length < 3) return {state: false, msg: 'First name too short'};
   return {state: true, msg: ''};
 };
 ///^[a-zA-Z]{3,20}$/
 const validateLastName = lName => {
   if (!lName) return {state: false, msg: 'Last name is required'};
   if (lName.length < 3) return {state: false, msg: 'Last name too long'};
-  if (lName.length > 20) return {state: false, msg: 'Last name too long'};
   return {state: true, msg: ''};
 };
 // /^(06|07)\d{8}$/;

@@ -6,7 +6,7 @@ import {s} from 'react-native-wind';
 const AccountScreen = () => {
   return (
     <View style={s`h-full`}>
-      <Navbar />
+      <Navbar selectedDemands={true} />
       <Text>accountScreen</Text>
     </View>
   );

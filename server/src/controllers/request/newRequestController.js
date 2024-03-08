@@ -1,8 +1,15 @@
 const supabase = require('../../models/supabase');
 
 const newRequest = async (req, res) => {
-  const {userId, description, price, city, address, dueDate, difficulty} =
-    req.body;
+  const {
+    userId,
+    description,
+    price,
+    city,
+    dueDate,
+    difficulty,
+    privatePhoneNumber,
+  } = req.body;
 
   try {
     const request = {
@@ -10,9 +17,9 @@ const newRequest = async (req, res) => {
       description: description,
       price: price,
       city: city,
-      address: address,
       dueDate: dueDate,
       difficulty: difficulty,
+      private_phoneNumber: privatePhoneNumber,
     };
 
     const {data: insertedRequest, error} = await supabase

@@ -2,32 +2,33 @@ const supabase = require('../../models/supabase');
 
 const getRequests = async (req, res) => {
   try {
-    const {difficulty, city} = req.query;
+    // Fetch all requests
+    const {data: allRequests, error: fetchReq} = await supabase
+      .from('requests')
+      .select('*');
 
-    let filteredRequests;
-
-    if (!difficulty && !city) {
-      const {data, error} = await supabase.from('requests').select('*');
-
-      if (error) {
-        throw error;
-      }
-
-      res.json(data);
-    } else {
-      const {data, error} = await supabase
-        .from('requests')
-        .select('*')
-        .eq('difficulty', difficulty)
-        .eq('city', city)
-        .order('created_at', {ascending: false});
-
-      if (error) {
-        throw error;
-      }
-
-      res.json(data);
+    if (fetchReq) {
+      throw fetchReq;
     }
+
+    // Fetch  demand IDs that are pending
+    const {data: demandIds, error: fetchDe} = await supabase
+      .from('demands')
+      .select('request_id')
+      .eq('state', 'pending');
+
+    if (fetchDe) {
+      throw fetchDe;
+    }
+    const demandIdArray = demandIds.map(demand => demand.request_id);
+    console.log(demandIdArray);
+
+    // Filter out requests whose IDs are in the demandIdArray
+    const filteredRequests = allRequests.filter(
+      request => !demandIdArray.some(id => id === request.id),
+    );
+
+    res.json(filteredRequests);
   } catch (error) {
     console.error('Error fetching requests:', error);
     res.status(500).json({error: 'Internal Server Error'});

@@ -14,6 +14,7 @@ const {
   difficultyMiddleware,
   cityMiddleware,
 } = require('../../middlewares/request/newRequestMiddlewares');
+const finishRegisterUser = require('../../controllers/auth/finishRegisterUserController');
 
 authRouter.post(
   '/register',
@@ -21,9 +22,14 @@ authRouter.post(
   lastNameMiddleware,
   phoneNumberMiddleware,
   passwordMiddleware,
-  idealDifficultydMiddleware,
-  cityMiddleware,
   registerUser,
+);
+
+authRouter.put(
+  '/register/finish',
+  cityMiddleware,
+  idealDifficultydMiddleware,
+  finishRegisterUser,
 );
 
 authRouter.post('/login', loginUser);

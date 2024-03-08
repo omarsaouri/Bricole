@@ -16,6 +16,7 @@ const newDemand = async (req, res) => {
       .select('*');
 
     if (error) {
+      console.error('Error inserting demand:', error.message);
       return res.status(400).json(error);
     }
 

@@ -21,7 +21,6 @@ requestRouter.post(
   descriptionMiddleware,
   priceMiddleware,
   cityMiddleware,
-  addressMiddleware,
   dueDateMiddleware,
   difficultyMiddleware,
   authToken,
