@@ -16,14 +16,7 @@ const putGranted = require('../../controllers/demand/putGrantedDemandController'
 const putState = require('../../controllers/demand/putStateDemandController');
 const demandRouter = express.Router();
 
-demandRouter.post(
-  '/new',
-  requestIdMiddleware,
-  userIdMiddleware,
-  grantedMiddleware,
-  stateMiddleware,
-  newDemand,
-); // create a new demand
+demandRouter.post('/new', requestIdMiddleware, userIdMiddleware, newDemand); // create a new demand
 demandRouter.get('/request/:requestId', getRequestDemands); // get all the demands of a certain request
 demandRouter.get('/user/:userId', getUserDemands); // get all the demands of a certain user
 demandRouter.put('/granted/:demandId', putGranted); //  grant permissision for the user

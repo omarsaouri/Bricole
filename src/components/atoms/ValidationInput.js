@@ -42,8 +42,8 @@ const ValidationInput = ({
         placeholderTextColor={'#a28dbe'}
         style={
           isValid
-            ? s`bg-foreground text-copy border-border border-2 p-3 pb-4 rounded-lg text-lg ${style}`
-            : s`bg-foreground text-copy border-error border-2 p-3 pb-4 rounded-lg text-lg ${style}`
+            ? s`  bg-foreground text-copy border-border border-2 p-3 pb-4 rounded-lg text-lg ${style}`
+            : s`  bg-foreground text-copy border-error border-2 p-3 pb-4 rounded-lg text-lg ${style}`
         }
       />
       <Text style={s`text-red-800 font-semibold text-justify p-1`}>

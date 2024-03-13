@@ -18,8 +18,10 @@ const LoginScreen = () => {
   const handleSubmit = async () => {
     try {
       const {data} = await loginUser(phoneNumber, password);
+      console.log(data);
       storeData('access_token', data.access_token);
       storeData('phoneNumber', data.user.phoneNumber);
+      storeData('userId', data.user.id.toString());
       Toast.show({
         type: 'success',
         text1: 'Welcome Back ' + data.user.firstName,

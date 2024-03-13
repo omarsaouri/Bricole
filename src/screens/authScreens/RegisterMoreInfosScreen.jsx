@@ -84,7 +84,7 @@ const RegisterMoreInfosScreen = () => {
           onBlur={() => setIsFocusLevels(false)}
           onChange={item => {
             setDifficultyValue(item.value);
-            setDifficulty(item.label);
+            setDifficulty(item.label.toLowerCase());
             setIsFocusLevels(false);
           }}
         />

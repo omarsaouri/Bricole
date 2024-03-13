@@ -20,7 +20,6 @@ requestRouter.post(
   '/new',
   descriptionMiddleware,
   priceMiddleware,
-  cityMiddleware,
   dueDateMiddleware,
   difficultyMiddleware,
   authToken,

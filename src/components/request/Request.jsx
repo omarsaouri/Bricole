@@ -6,6 +6,9 @@ import Button from '../atoms/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircle as solidCircle} from '@fortawesome/free-solid-svg-icons/faCircle';
 import {faCircle as regularCircle} from '@fortawesome/free-regular-svg-icons/faCircle';
+import postDemand from '../../api/modules/request/postDemand';
+import getData from '../../helpers/asyncStorage/getData';
+import Toast from 'react-native-toast-message';
 
 const Request = ({request}) => {
   const [firstName, setFirstName] = useState();
@@ -14,9 +17,33 @@ const Request = ({request}) => {
   const [expanded, setExpanded] = useState(false);
   const initials = firstName?.charAt(0) + lastName?.charAt(0);
 
+  const handleInterested = async () => {
+    const id = await getData('userId');
+    try {
+      const {data} = await postDemand(
+        parseInt(request.id),
+        parseInt(id),
+        false,
+        'pending',
+      );
+      console.log(data);
+      Toast.show({
+        type: 'success',
+        text1: 'Your demand is sent',
+      });
+    } catch (error) {
+      console.log(error.response.data.error);
+      Toast.show({
+        type: 'error',
+        text1: error.response.data.error,
+      });
+    }
+  };
+
   useEffect(() => {
     setDifficulty(request.difficulty);
     fetchUser();
+    console.log(request);
   }, []);
 
   const toggleExpand = () => {
@@ -25,7 +52,7 @@ const Request = ({request}) => {
 
   const fetchUser = async () => {
     try {
-      const {data} = await getUser(request.id);
+      const {data} = await getUser(request.user_id);
       setFirstName(data.firstName);
       setLastName(data.lastName);
     } catch (error) {
@@ -135,9 +162,7 @@ const Request = ({request}) => {
           )}
         </View>
 
-        <Text style={s`text-copy mt-3`}>
-          {request.city + ', ' + request.address}
-        </Text>
+        <Text style={s`text-copy mt-3`}>{request.city}</Text>
         <Text style={s`text-copy-lighter font-bold `}>
           {'Due : ' + formattedDueDate}
         </Text>
@@ -150,6 +175,7 @@ const Request = ({request}) => {
           style={'bg-primary-dark flex justify-center rounded-md p-2'}
           title="I'm interested"
           textStyle={'text-primary-content text-md font-bold'}
+          onPress={handleInterested}
         />
       </View>
     </View>

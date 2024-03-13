@@ -21,7 +21,6 @@ const getRequests = async (req, res) => {
       throw fetchDe;
     }
     const demandIdArray = demandIds.map(demand => demand.request_id);
-    console.log(demandIdArray);
 
     // Filter out requests whose IDs are in the demandIdArray
     const filteredRequests = allRequests.filter(

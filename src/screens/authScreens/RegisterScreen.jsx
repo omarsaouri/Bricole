@@ -30,7 +30,7 @@ const RegisterScreen = () => {
         );
         storeData('access_token', data.access_token);
         storeData('phoneNumber', data.user.phoneNumber);
-        storeData('id', data.user.id.toString());
+        storeData('userId', data.user.id.toString());
 
         Toast.show({
           type: 'success',
