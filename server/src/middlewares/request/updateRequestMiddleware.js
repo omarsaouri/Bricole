@@ -1,3 +1,4 @@
+const {validateState} = require('../../validations/demand/demandValidations');
 const {
   validateCity,
   validateDueDate,
@@ -39,8 +40,8 @@ const updateRequestMiddleware = async (req, res, next) => {
     res.status(400).send(msg);
   }
 
-  if (key === 'difficulty') {
-    const {state, msg} = validateDifficulty(value);
+  if (key === 'state') {
+    const {state, msg} = validateState(value);
     if (state) return next();
     res.status(400).send(msg);
   }

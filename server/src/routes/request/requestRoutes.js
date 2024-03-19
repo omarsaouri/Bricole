@@ -15,6 +15,7 @@ const getRequest = require('../../controllers/request/getOneRequestController');
 const deleteRequest = require('../../controllers/request/deleteRequestController');
 const updateRequest = require('../../controllers/request/updateRequestController');
 const updateRequestMiddleware = require('../../middlewares/request/updateRequestMiddleware');
+const getUserRequests = require('../../controllers/request/getUserRequestController');
 
 requestRouter.post(
   '/new',
@@ -26,6 +27,7 @@ requestRouter.post(
   newRequest,
 );
 requestRouter.get('/', authToken, getRequests);
+requestRouter.get('/user', authToken, getUserRequests);
 requestRouter.get('/:id', authToken, getRequest);
 requestRouter.put('/:id', authToken, updateRequestMiddleware, updateRequest);
 requestRouter.delete('/delete', authToken, deleteRequest);

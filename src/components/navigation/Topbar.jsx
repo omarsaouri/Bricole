@@ -9,7 +9,7 @@ import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 const Topbar = ({stackLength}) => {
   return (
     <View
-      style={s`flex-row items-center w-full px-4 justify-between border-b-2 border-border shadow mb-2`}>
+      style={s`flex-row items-center w-full px-4 justify-between border-b-2 border-border shadow mb-1`}>
       {stackLength !== 0 ? <BackButton /> : <View style={s`w-5`}></View>}
       <Logo size={16} marginBottom={0} />
       <FontAwesomeIcon icon={faUser} color="#904ce9" size={25} />

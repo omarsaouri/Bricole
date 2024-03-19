@@ -10,12 +10,12 @@ import postRequest from '../../api/modules/request/postRequest';
 import Button from '../../components/atoms/Button';
 import ValidationInput from '../../components/atoms/ValidationInput';
 import Topbar from '../../components/navigation/Topbar';
+import clearAsyncStorage from '../../helpers/asyncStorage/clearAsyncStorage';
 import getData from '../../helpers/asyncStorage/getData';
 import getLocation from '../../helpers/location/getLocation';
 import locationToString from '../../helpers/location/locationToString';
-import useCities from '../../hooks/useCities';
-import clearAsyncStorage from '../../helpers/asyncStorage/clearAsyncStorage';
 import useAuth from '../../hooks/useAuth';
+import useCities from '../../hooks/useCities';
 
 const NewRequestScreen = () => {
   useAuth();
@@ -213,7 +213,7 @@ const NewRequestScreen = () => {
               onBlur={() => setIsFocus(false)}
               onChange={item => {
                 setCityValue(item.value);
-                setCity(item.label + ', Morocco');
+                setCity(item.label);
                 setIsFocus(false);
               }}
             />

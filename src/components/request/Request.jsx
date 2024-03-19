@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Modal, Text, TouchableOpacity, View} from 'react-native';
 import {s} from 'react-native-wind';
 import getUser from '../../api/modules/user/getUser';
 import Button from '../atoms/Button';
@@ -9,13 +9,33 @@ import {faCircle as regularCircle} from '@fortawesome/free-regular-svg-icons/faC
 import postDemand from '../../api/modules/request/postDemand';
 import getData from '../../helpers/asyncStorage/getData';
 import Toast from 'react-native-toast-message';
+import {
+  faClipboard,
+  faClipboardList,
+  faX,
+} from '@fortawesome/free-solid-svg-icons';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const Request = ({request}) => {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
   const [difficulty, setDifficulty] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
   const initials = firstName?.charAt(0) + lastName?.charAt(0);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const copyToClipboard = () => {
+    Clipboard.setString(phoneNumber);
+    Toast.show({
+      type: 'success',
+      text1: 'Phone number copied to clipboard',
+    });
+  };
 
   const handleInterested = async () => {
     const id = await getData('userId');
@@ -26,11 +46,19 @@ const Request = ({request}) => {
         false,
         'pending',
       );
-      console.log(data);
-      Toast.show({
-        type: 'success',
-        text1: 'Your demand is sent',
-      });
+      if (data.phoneNumber) {
+        setPhoneNumber(data.phoneNumber);
+        Toast.show({
+          type: 'success',
+          text1: 'Your demand is sent',
+        });
+        toggleModal();
+      } else {
+        Toast.show({
+          type: 'success',
+          text1: 'Your demand is sent',
+        });
+      }
     } catch (error) {
       console.log(error.response.data.error);
       Toast.show({
@@ -162,7 +190,7 @@ const Request = ({request}) => {
           )}
         </View>
 
-        <Text style={s`text-copy mt-3`}>{request.city}</Text>
+        <Text style={s`text-copy mt-3`}>{request.city}, Morocco</Text>
         <Text style={s`text-copy-lighter font-bold `}>
           {'Due : ' + formattedDueDate}
         </Text>
@@ -173,11 +201,60 @@ const Request = ({request}) => {
         </Text>
         <Button
           style={'bg-primary-dark flex justify-center rounded-md p-2'}
-          title="I'm interested"
           textStyle={'text-primary-content text-md font-bold'}
+          title="I'm interested"
           onPress={handleInterested}
         />
       </View>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={toggleModal}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          }}>
+          <View
+            style={[
+              {
+                elevation: 5,
+                gap: 10,
+              },
+              s`flex rouned-lg bg-background p-8 rounded-lg w-11/12 border-border border`,
+            ]}>
+            <Button
+              iconLeft={
+                <FontAwesomeIcon icon={faX} size={20} color="#e94c4c" />
+              }
+              onPress={toggleModal}
+            />
+            <View style={[s`flex-row items-center justify-center`, {gap: 10}]}>
+              <Text style={s`text-center font-bold text-2xl text-copy`}>
+                {phoneNumber}
+              </Text>
+              <Button
+                iconLeft={
+                  <FontAwesomeIcon icon={faClipboardList} color="#a28dbe" />
+                }
+                style="pt-4"
+                onPress={copyToClipboard}
+              />
+            </View>
+
+            <Text style={s`text-copy-light font-semibold text-justify `}>
+              This user has{' '}
+              <Text style={s`text-primary`}>private number disabled</Text>, so
+              you have direct access to his phone number. Please
+              <Text style={s`text-primary`}> contact</Text> them as soon as
+              possible.
+            </Text>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };

@@ -35,7 +35,7 @@ const ValidationInput = ({
     <View>
       <TextInput
         onChangeText={handleTextChange}
-        value={text}
+        value={String(text)}
         placeholder={placeholder}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}

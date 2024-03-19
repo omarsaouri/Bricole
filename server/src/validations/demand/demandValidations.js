@@ -14,7 +14,6 @@ const validateState = stateInput => {
   if (!stateInput) return {state: false, message: 'state is required'};
   if (
     stateInput.toLowerCase() != 'idle' &&
-    stateInput.toLowerCase() != 'rejected' &&
     stateInput.toLowerCase() != 'pending' &&
     stateInput.toLowerCase() != 'finished' &&
     stateInput.toLowerCase() != 'failed'

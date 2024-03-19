@@ -7,9 +7,8 @@ const updateRequest = async (req, res) => {
   try {
     const {data: existingRequest, error: fetchError} = await supabase
       .from('requests')
-      .select('*')
+      .update({[key]: value})
       .eq('id', requestId)
-      .single()
       .select('*');
 
     if (fetchError) {
@@ -20,18 +19,7 @@ const updateRequest = async (req, res) => {
       return res.status(404).send('Request not found');
     }
 
-    const {data: updatedRequest, error: updateError} = await supabase
-      .from('requests')
-      .update({[key]: value})
-      .eq('id', requestId)
-      .single()
-      .select('*');
-
-    if (updateError) {
-      throw updateError;
-    }
-
-    return res.status(200).json(updatedRequest);
+    return res.status(200).json(existingRequest);
   } catch (error) {
     console.error('Error updating request:', error);
     return res

@@ -16,8 +16,32 @@ const newDemand = async (req, res) => {
     }
 
     if (existingDemands.length > 0) {
-      // Demand already exists, return a message or status code
       return res.status(400).json({error: 'You already sent a demand !'});
+    }
+    // check if the request has non private number
+    const {data: request, error: requestError} = await supabase
+      .from('requests')
+      .select('*')
+      .eq('id', requestId)
+      .single();
+
+    if (requestError) {
+      console.error('Error checking request:', requestError.message);
+      return res.status(400).json(requestError);
+    }
+
+    if (request.private_phoneNumber === false) {
+      const {data: userPhoneNumber, error: userError} = await supabase
+        .from('users')
+        .select('phoneNumber')
+        .eq('id', request.user_id)
+        .single();
+
+      if (userError) {
+        console.error('Error checking user:', userError.message);
+        return res.status(400).json(userError);
+      }
+      return res.json(userPhoneNumber);
     }
 
     const newDemand = {

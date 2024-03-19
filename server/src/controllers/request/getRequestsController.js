@@ -2,27 +2,34 @@ const supabase = require('../../models/supabase');
 
 const getRequests = async (req, res) => {
   try {
-    // Fetch all requests
-    const {data: allRequests, error: fetchReq} = await supabase
-      .from('requests')
-      .select('*');
+    let query = supabase.from('requests').select('*');
+
+    const {city, difficulty} = req.query;
+
+    if (city && difficulty) {
+      query = query.eq('city', city).eq('difficulty', difficulty);
+    } else if (city) {
+      query = query.eq('city', city);
+    } else if (difficulty) {
+      query = query.eq('difficulty', difficulty);
+    }
+
+    const {data: allRequests, error: fetchReq} = await query;
 
     if (fetchReq) {
       throw fetchReq;
     }
 
-    // Fetch  demand IDs that are pending
     const {data: demandIds, error: fetchDe} = await supabase
       .from('demands')
       .select('request_id')
-      .eq('state', 'pending');
+      .eq('state', 'accepted');
 
     if (fetchDe) {
       throw fetchDe;
     }
     const demandIdArray = demandIds.map(demand => demand.request_id);
 
-    // Filter out requests whose IDs are in the demandIdArray
     const filteredRequests = allRequests.filter(
       request => !demandIdArray.some(id => id === request.id),
     );

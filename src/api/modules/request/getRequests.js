@@ -1,10 +1,10 @@
 import useAxiosClient from '../../config/userAxios';
 
-const getRequests = async (idealDifficulty, city) => {
+const getRequests = async (difficulty, city) => {
   const client = await useAxiosClient();
   return client.get('/requests', {
     params: {
-      idealDifficulty: idealDifficulty,
+      difficulty: difficulty,
       city: city,
     },
   });
