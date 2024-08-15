@@ -77,17 +77,20 @@ Users can log in using their phone number and password. The interface is user-fr
 
 # Sign-Up Process
 Creating a new account is straightforward. Users enter their first name, last name, phone number, and password. Real-time validation checks the input, providing instant feedback with error messages if necessary, ensuring a smooth and error-free sign-up process.
+
 <img width="210" alt="image" src="https://github.com/user-attachments/assets/d3d8c0b6-e7f8-4e4f-922f-cd191c2d8cd5">
 
  
 
 # Finalizing Registration
 After the initial sign-up, users are prompted to provide additional details like their city and preferred request difficulty level. This personalization ensures that users receive relevant requests tailored to their location and preferences.
+
 <img width="208" alt="image" src="https://github.com/user-attachments/assets/76e0e693-cabf-4bb1-9d73-de3cb263a739">
 
 
 # News Feed Section
 The main page of the application is where users spend most of their time. Here, they can view and filter new requests according to their preferences. The interface is designed to be intuitive, presenting only essential information and allowing users to express interest in requests directly from the feed.
+
 <img width="205" alt="image" src="https://github.com/user-attachments/assets/ab29a2e0-7f85-4994-99af-676a7381bfc8">
 
 
