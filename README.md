@@ -65,12 +65,12 @@ You've successfully run and modified your React Native App. :partying_face:
 This document provides a comprehensive overview of our mobile application. The goal is to give a clear understanding of the app's key features and functionality, with illustrative screenshots to guide users through the various sections.
 
 # Home Screen
-Our application is designed to simplify community service requests. On the home screen, users can either log in if they already have an account or create a new one.
+Our application is designed to simplify community service requests. On the home screen, users can either log in if they already have an account or create a new one.<br>
 <img width="159" alt="image" src="https://github.com/user-attachments/assets/8fd65bc1-b9e9-4398-98cb-1c79e4c9ccd7">
 
 
 # Login Process
-Users can log in using their phone number and password. The interface is user-friendly, offering quick access to the personal space. Error messages are displayed in case of incorrect credentials, guiding the user to re-enter the correct information.
+Users can log in using their phone number and password. The interface is user-friendly, offering quick access to the personal space. Error messages are displayed in case of incorrect credentials, guiding the user to re-enter the correct information. <br>
 <img width="206" alt="image" src="https://github.com/user-attachments/assets/487d8491-8a4a-45a0-a75a-3619bda4424b">
 
  
