@@ -59,21 +59,75 @@ Now that you have successfully run the app, let's modify it.
 
 You've successfully run and modified your React Native App. :partying_face:
 
-### Now what?
+## Application Overview:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+# Introduction
+This document provides a comprehensive overview of our mobile application. The goal is to give a clear understanding of the app's key features and functionality, with illustrative screenshots to guide users through the various sections.
 
-# Troubleshooting
+# Home Screen
+Our application is designed to simplify community service requests. On the home screen, users can either log in if they already have an account or create a new one.
+<img width="159" alt="image" src="https://github.com/user-attachments/assets/8fd65bc1-b9e9-4398-98cb-1c79e4c9ccd7">
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
-# Learn More
+# Login Process
+Users can log in using their phone number and password. The interface is user-friendly, offering quick access to the personal space. Error messages are displayed in case of incorrect credentials, guiding the user to re-enter the correct information.
+<img width="206" alt="image" src="https://github.com/user-attachments/assets/487d8491-8a4a-45a0-a75a-3619bda4424b">
 
-To learn more about React Native, take a look at the following resources:
+ 
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+# Sign-Up Process
+Creating a new account is straightforward. Users enter their first name, last name, phone number, and password. Real-time validation checks the input, providing instant feedback with error messages if necessary, ensuring a smooth and error-free sign-up process.
+<img width="210" alt="image" src="https://github.com/user-attachments/assets/d3d8c0b6-e7f8-4e4f-922f-cd191c2d8cd5">
+
+ 
+
+# Finalizing Registration
+After the initial sign-up, users are prompted to provide additional details like their city and preferred request difficulty level. This personalization ensures that users receive relevant requests tailored to their location and preferences.
+<img width="208" alt="image" src="https://github.com/user-attachments/assets/76e0e693-cabf-4bb1-9d73-de3cb263a739">
+
+
+# News Feed Section
+The main page of the application is where users spend most of their time. Here, they can view and filter new requests according to their preferences. The interface is designed to be intuitive, presenting only essential information and allowing users to express interest in requests directly from the feed.
+<img width="205" alt="image" src="https://github.com/user-attachments/assets/ab29a2e0-7f85-4994-99af-676a7381bfc8">
+
+
+<img width="205" alt="image" src="https://github.com/user-attachments/assets/62be0949-d7bc-4bc6-988c-71589cb970d2">
+
+
+ 
+# Creating a New Request
+Users can create new requests via an easy-to-navigate form. The form includes fields to capture all necessary details. In case of errors, clear instructions and error messages help users correct their inputs, making the process efficient.
+
+<img width="205" alt="image" src="https://github.com/user-attachments/assets/0cb2ce01-2767-4d1d-b337-312b3a643a52">
+
+ 
+
+# Request Management Section
+This section allows users to manage their existing requests. They can edit, delete, or update the status of their requests. The editing interface pre-fills the form with existing data, making it easy to update requests.
+
+<img width="209" alt="image" src="https://github.com/user-attachments/assets/dd115f8e-e4c5-47b7-8631-549c9801fe39">
+
+ 
+
+# Sent Requests Section
+Users can view and manage their sent requests in this section. They can check the status (pending, accepted, or rejected) and perform actions like canceling or deleting requests. Accepted requests offer direct contact with the relevant user to coordinate details.
+
+<img width="204" alt="image" src="https://github.com/user-attachments/assets/34b4fcbf-95f6-405f-9421-ef8bb12bb9bd">
+
+<img width="204" alt="image" src="https://github.com/user-attachments/assets/aeeb2189-74ec-44e3-abf7-3b8678161ff8">
+
+
+ 
+
+# Received Requests Section
+In the received requests section, users can manage incoming requests, deciding whether to accept or reject offers of help. Accepting a request updates its status and notifies all involved parties, enabling them to coordinate further. Rejections also update the request status, clearly communicating the decision.
+
+<img width="194" alt="image" src="https://github.com/user-attachments/assets/2f6adf6a-1803-445a-b5bf-a66dd6a0ada4">
+
+
+
+# My Account Section
+The account section allows users to view and manage their personal information, such as name, phone number, city, and preferred request difficulty level. This section also provides an option to log out, ensuring account security and privacy.
+
+<img width="202" alt="image" src="https://github.com/user-attachments/assets/93dbae84-e0a5-40e9-b901-cab437be2855">
+
